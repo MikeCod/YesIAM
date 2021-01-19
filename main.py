@@ -1,24 +1,27 @@
 #!python3
 
-########################################################################################
-# name : YES I AM                                                                      #
-# last update : 19/01/2021                                                             #
-# develop by : Dimitri Simon, Charles Régniez                                          #
-# version : 1.3                                                                        #
-# _______________________________________GOALS_________________________________________#
-# Iteration 1                                                                          #
-#   TODO :                                                                             #
-#   TODO :                                                                             #
-#   TODO :                                                                             #
-# Iteration 2                                                                          #
-#   TODO :                                                                             #
-#   TODO :                                                                             #
-#   TODO :                                                                             #
-# Iteration 3                                                                          #
-#   TODO :                                                                             #
-#   TODO :                                                                             #
-#   TODO :                                                                             #
-########################################################################################
+###################################################################################################
+# name : YES I AM                                                                                 #
+# last update : 19/01/2021                                                                        #
+# develop by : Dimitri Simon, Charles Régniez                                                     #
+# version : 1.3                                                                                   #
+# _______________________________________GOALS____________________________________________________#
+# Iteration 1                                                                                     #
+#   TODO :  get Hostname, Mac, IP, Platforme, Username                                            #
+#   TODO :  compare local information with remote information (SQL request)                       #
+#   TODO :  create BDD type                                                                       #
+#   TODO :  recover all virtuals machines                                                         #
+# Iteration 2                                                                                     #
+#   TODO :  depending on the results maintain the connection or not                               #
+#   TODO :  if it's not send an email to an administrator befor disconnect                        #
+#   TODO :  option for reconnect the machine if the script run again with the argument --enable   #
+#   TODO :  creat a script for windows and for linux support                                      #
+#   TODO :  automating the script with cron for linux and run it on Windows                       #
+# Iteration 3                                                                                     #
+#   TODO :                                                                                        #
+#   TODO :                                                                                        #
+#   TODO :                                                                                        #
+###################################################################################################
 
 import time
 import mysql.connector
