@@ -29,6 +29,7 @@ import os
 import sys
 import platform
 import smtplib, ssl
+import getpass
 
 SLEEP = 900 # Each x seconds the script checks if something changed
 
@@ -45,6 +46,8 @@ TABLE = "users"
 C_HOSTNAME = "hostname"
 C_MAC = "mac"
 C_IP = "ip"
+C_PLATFORM = "platform"
+C_USERNAME = "username"
 
 # SMTP informations
 # /!\ WARNING : It can be necessary to activate unsecured application (like for Gmail)
@@ -61,11 +64,15 @@ SMTP_TEXT = ("Subject : {}\r\n"
     "Nom d'hote : {}\r\n"
     "Adresse MAC : {}\r\n"
     "Adresse IP : {}\r\n"
+    "Platforme : {}\r\n"
+    "Nom d'utilisateur : {}\r\n"
     "\r\n"
     "Les informations originelles etaient :\r\n"
     "Nom d'hote : {}\r\n"
     "Adresse MAC : {}\r\n"
     "Adresse IP : {}\r\n"
+    "Platforme : {}\r\n"
+    "Nom d'utilisateur : {}\r\n"
     "\r\n"
 )
 
@@ -86,7 +93,13 @@ def get_ip() -> str:
         print("Network unreachable")
     return ip
 
-origin = (get_hostname(), get_mac(), get_ip())
+def get_platform() -> str:
+    return platform.system() + platform.release()
+
+def get_username() -> str: 
+    return getpass.getuser()
+
+origin = (get_hostname(), get_mac(), get_ip(), get_platform(), get_username())
 
 # Manage all interfaces
 # Warning : Root privilege required for Linux
@@ -113,8 +126,8 @@ def alert(mycursor):
     server.login(SMTP_USER, SMTP_PASS)
     server.sendmail(SMTP_USER, SMTP_RCPT, SMTP_TEXT.format(SMTP_SUBJ, 
         origin[0], platform.system(),
-        get_hostname(), get_mac(), get_ip(), 
-        origin[0], origin[1], origin[2])
+        get_hostname(), get_mac(), get_ip(), get_platform(), get_username(), 
+        origin[0], origin[1], origin[2], origin[3], origin[4])
     )
     server.quit()
 
@@ -135,10 +148,12 @@ while True:
         mycursor = mydb.cursor()
         
         while True:
-            mycursor.execute("SELECT * FROM {} WHERE {} = '{}' AND {} = '{}' AND {} = '{}'".format(TABLE, 
+            mycursor.execute("SELECT * FROM {} WHERE {} = '{}' AND {} = '{}' AND {} = '{}' AND {} = '{}' AND {} = '{}'".format(TABLE, 
                 C_HOSTNAME, get_hostname(), 
                 C_MAC, get_mac(),
-                C_IP, get_ip()
+                C_IP, get_ip(),
+                C_PLATFORM, get_platform(),
+                C_USERNAME, get_username()
             ))
             
             # If the user has not been found in database
