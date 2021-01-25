@@ -5,7 +5,7 @@
 # last update : 19/01/2021                                                                        #
 # develop by : Dimitri Simon, Charles Régniez                                                     #
 # version : 1.3                                                                                   #
-# _______________________________________GOALS____________________________________________________#
+#________________________________________GOALS____________________________________________________#
 # Iteration 1                                                                                     #
 #   TODO :  get Hostname, Mac, IP, Platforme, Username                                            #
 #   TODO :  compare local information with remote information (SQL request)                       #
@@ -18,6 +18,7 @@
 #   TODO :  creat a script for windows and for linux support                                      #
 #   TODO :  automating the script with cron for linux and run it on Windows                       #
 # Iteration 3                                                                                     #
+#   TODO :  test vm : - todo : debian
 #   TODO :                                                                                        #
 #   TODO :                                                                                        #
 #   TODO :                                                                                        #
