@@ -1,24 +1,27 @@
 #!python3
 
-########################################################################################
-# name : YES I AM																	  #
-# last update : 19/01/2021															 #
-# develop by : Dimitri Simon, Charles Régniez										  #
-# version : 1.3																		#
-# _______________________________________GOALS_________________________________________#
-# Iteration 1																		  #
-#   TODO :																			 #
-#   TODO :																			 #
-#   TODO :																			 #
-# Iteration 2																		  #
-#   TODO :																			 #
-#   TODO :																			 #
-#   TODO :																			 #
-# Iteration 3																		  #
-#   TODO :																			 #
-#   TODO :																			 #
-#   TODO :																			 #
-########################################################################################
+###################################################################################################
+# name : YES I AM																				 #
+# last update : 19/01/2021																		#
+# develop by : Dimitri Simon, Charles Régniez													 #
+# version : 1.3																				   #
+# _______________________________________GOALS____________________________________________________#
+# Iteration 1																					 #
+#   TODO :  get Hostname, Mac, IP, Platforme, Username											#
+#   TODO :  compare local information with remote information (SQL request)					   #
+#   TODO :  create BDD type																	   #
+#   TODO :  recover all virtuals machines														 #
+# Iteration 2																					 #
+#   TODO :  depending on the results maintain the connection or not							   #
+#   TODO :  if it's not send an email to an administrator befor disconnect						#
+#   TODO :  option for reconnect the machine if the script run again with the argument --enable   #
+#   TODO :  creat a script for windows and for linux support									  #
+#   TODO :  automating the script with cron for linux and run it on Windows					   #
+# Iteration 3																					 #
+#   TODO :																						#
+#   TODO :																						#
+#   TODO :																						#
+###################################################################################################
 
 import time
 import mysql.connector
@@ -94,7 +97,7 @@ def get_ip() -> str:
 	return ip
 
 def get_platform() -> str:
-	return platform.system() + " " + platform.release()
+	return platform.system() + platform.release()
 
 def get_username() -> str: 
 	return getpass.getuser()
@@ -102,7 +105,7 @@ def get_username() -> str:
 origin = (get_hostname(), get_mac(), get_ip(), get_platform(), get_username())
 
 # Manage all interfaces
-# Warning : Root privilege required for Linux, or Administrator privilege for Windows
+# Warning : Root privilege required for Linux
 def interfaces(enable=False):
 	if not enable:
 		if platform.system() == "Windows":
@@ -149,7 +152,7 @@ while True:
 		
 		while True:
 			mycursor.execute("SELECT * FROM {} WHERE {} = '{}' AND {} = '{}' AND {} = '{}' AND {} = '{}' AND {} = '{}'".format(TABLE, 
-				C_HOSTNAME, get_hostname(),
+				C_HOSTNAME, get_hostname(), 
 				C_MAC, get_mac(),
 				C_IP, get_ip(),
 				C_PLATFORM, get_platform(),
